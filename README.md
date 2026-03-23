@@ -1,100 +1,50 @@
-# GuitarLA — Backend API REST
+## Tecnologías utilizadas
 
-API RESTful desarrollada con Node.js, Express y PostgreSQL para el proyecto GuitarLA.
-
-## Tecnologías
-
-- Node.js + TypeScript
-- Express.js
-- Sequelize ORM
-- PostgreSQL (Render)
-- CORS
+- **Entorno & Framework:** Node.js, Express.js
+- **Lenguaje:** TypeScript
+- **Base de Datos & ORM:** PostgreSQL, Sequelize
+- **Herramientas extra:** CORS, Express-Validator, Dotenv
 
 ## Requisitos previos
 
-- Node.js v18 o superior
-- npm
-- Una base de datos PostgreSQL (local o en Render)
+Asegúrate de tener instalado en tu entorno local:
+* **Node.js** (v18 o superior recomendado)
+* **npm** (Gestor de paquetes de Node)
+* Una instancia de **PostgreSQL** corriendo
 
-## Instalación
+## Instrucciones de Instalación y Configuración
 
-1. Clona el repositorio:
+Sigue estos pasos exactos para levantar el proyecto en tu máquina local:
 
-```bash
-git clone <url-del-repo>
-cd guitarras-back
-```
+### 1. Instalar dependencias
+Abre tu terminal, navega hasta la carpeta raíz del proyecto (donde se encuentra el archivo `package.json`) y ejecuta el siguiente comando para descargar todos los módulos necesarios:
 
-2. Instala las dependencias:
-
-```bash
+## bash
 npm install
-```
 
-3. Crea el archivo `.env` en la raíz del proyecto con las siguientes variables:
 
-```env
-DATABASE_URL=postgresql://usuario:contraseña@host/nombre_db
-```
+## DB
+DB_URL=postgresql://tu_usuario:tu_contraseña@localhost:5432/nombre_de_tu_bd
 
-> Si usas Render, copia el **External Database URL** desde el dashboard de tu base de datos.
-
-4. Crea la tabla en tu base de datos PostgreSQL:
-
-```sql
 CREATE TABLE guitarra (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     descripcion TEXT NOT NULL,
-    precio INTEGER NOT NULL,
+    precio FLOAT NOT NULL,
     img VARCHAR(255) NOT NULL
 );
-```
 
-## Arrancar el servidor
 
-Modo desarrollo:
-
-```bash
-npm run dev
-```
-
-El servidor corre en `http://localhost:4000`
-
-## Endpoints disponibles
-
-| Método | Ruta | Descripción |
-|--------|------|-------------|
-| GET | `/api/guitarras` | Obtener todas las guitarras |
-| GET | `/api/guitarras/:id` | Obtener una guitarra por ID |
-| POST | `/api/guitarras` | Crear una guitarra |
-| PUT | `/api/guitarras/:id` | Actualizar una guitarra |
-| DELETE | `/api/guitarras/:id` | Eliminar una guitarra |
-
-## Estructura del proyecto
-
-```
-src/
-├── config/
-│   └── db.ts           # Configuración de Sequelize
-├── handlers/
-│   └── guitarra.ts     # Controladores
-├── middleware/
-│   └── index.ts        # Validación de errores
-├── models/
-│   └── Guitarra.model.ts  # Modelo Sequelize
-├── router.ts           # Rutas
-├── server.ts           # Configuración de Express
-└── index.ts            # Punto de entrada
-```
-
-## Ejemplo de body para POST/PUT
-
-```json
-{
-    "nombre": "Lukather",
-    "descripcion": "Descripción de la guitarra",
-    "precio": 299,
-    "img": "guitarra_01"
-}
-```
+Endpoints Principales (Rutas)
+La API cuenta con las siguientes rutas para interactuar con el catálogo desde el frontend:
+Método HTTP
+## RutaDescripciónGET/api/guitarras
+Obtiene el catálogo completo de guitarras.
+## GET/api/guitarras/:id
+Busca una guitarra específica por su ID.
+## POST/api/guitarras
+Registra una nueva guitarra en el inventario.
+## PUT/api/guitarras/:id
+Actualiza la información de una guitarra existente.
+## DELETE/api/guitarras/:id
+Elimina una guitarra del registro.
